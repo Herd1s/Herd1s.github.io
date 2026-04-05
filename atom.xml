@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Herd1s</title>
   <subtitle>blog</subtitle>
-  <link href="https://mizuki.mysqil.com/" rel="alternate" type="text/html"/>
-  <link href="https://mizuki.mysqil.com/atom.xml" rel="self" type="application/atom+xml"/>
-  <id>https://mizuki.mysqil.com/</id>
-  <updated>2025-11-03T08:35:33.081Z</updated>
+  <link href="https://herd1s.github.io/" rel="alternate" type="text/html"/>
+  <link href="https://herd1s.github.io/atom.xml" rel="self" type="application/atom+xml"/>
+  <id>https://herd1s.github.io/</id>
+  <updated>2026-04-05T07:39:19.323Z</updated>
   <language>en</language>
   <entry>
     <title>科电俱乐部智能车培训教程</title>
-    <link href="https://mizuki.mysqil.com/posts/car/%E7%A7%91%E7%94%B5%E4%BF%B1%E4%B9%90%E9%83%A8%E6%99%BA%E8%83%BD%E8%BD%A6%E5%9F%B9%E8%AE%AD%E6%95%99%E7%A8%8B/" rel="alternate" type="text/html"/>
-    <id>https://mizuki.mysqil.com/posts/car/%E7%A7%91%E7%94%B5%E4%BF%B1%E4%B9%90%E9%83%A8%E6%99%BA%E8%83%BD%E8%BD%A6%E5%9F%B9%E8%AE%AD%E6%95%99%E7%A8%8B/</id>
+    <link href="https://herd1s.github.io/posts/car/%E7%A7%91%E7%94%B5%E4%BF%B1%E4%B9%90%E9%83%A8%E6%99%BA%E8%83%BD%E8%BD%A6%E5%9F%B9%E8%AE%AD%E6%95%99%E7%A8%8B/" rel="alternate" type="text/html"/>
+    <id>https://herd1s.github.io/posts/car/%E7%A7%91%E7%94%B5%E4%BF%B1%E4%B9%90%E9%83%A8%E6%99%BA%E8%83%BD%E8%BD%A6%E5%9F%B9%E8%AE%AD%E6%95%99%E7%A8%8B/</id>
     <published>2025-11-03T00:00:00.000Z</published>
     <updated>2025-11-03T00:00:00.000Z</updated>
     <summary>科电俱乐部智能车教学入门课程，介绍智能车入门与进阶知识</summary>
     <content type="html"><![CDATA[<p>此教程为科电俱乐部智能车教学入门课程，目的是介绍，引领智能车入门与进阶</p>
 <h1>一、车模基本组成结构</h1>
 <p>下方为智能车硬件基本组成</p>
-<p><img src="https://mizuki.mysqil.com/_astro/diagram.Cd12m3Y3_ZRcyfJ.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/diagram.Cd12m3Y3_ZRcyfJ.webp" alt="" /></p>
 <p>大致一个三人组别推荐为一人硬件，其余两人软件。</p>
 <p>根据每年赛题到<a href="https://gitee.com/seekfree/">逐飞官网</a>下载相关资料。</p>
 <p>逐飞官网一般都有比赛的芯片包和相关软件的下载教程</p>
@@ -53,23 +53,23 @@
 <p>       └── user/               # 用户自定义文件</p>
 <p>逐飞库简而言之就是逐飞基于官方的开源库根据竞赛需求简化、针对智能车的需求二次封装的库。</p>
 <p>这个库（以RT1064库为例）中一般包含以下内容</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-7.BCxxAv0-_m0QqI.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-7.BCxxAv0-_m0QqI.webp" alt="" /></p>
 <p>其中我们最需要使用的是user_c、user_h、code、zf_driver和zf_device</p>
 <p>我们依次来介绍各个文件相关作用</p>
 <p>首先user_c、user_h</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-6.YP-ZoO9J_Z1NEsD.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-6.YP-ZoO9J_Z1NEsD.webp" alt="" /></p>
 <p>在user_c中有咱们熟悉的main.c函数，其中main处就是咱们运行代码的地方。</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-4.itR6ym5g_FeDSl.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-4.itR6ym5g_FeDSl.webp" alt="" /></p>
 <p>它的头文件zf_common_headfile.h值得我们注意一下，包含了芯片底层、外设等头文件，有些过分多了，所以根据自己的需求可以注释掉一些不用的头文件节省时间。</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-3.gF8KUfPy_Z1p5g0O.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-3.gF8KUfPy_Z1p5g0O.webp" alt="" /></p>
 <p>在isr.c中主要是中断回调函数，在其中做中断处理，这里是我认为最为重要的地方，一般来说所有的数据采集包括陀螺仪数据、编码器数据等带放在中断中采集，图像运算量较多就放在while中执行就好</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-2.CROeZh8r_ZYcHSu.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-2.CROeZh8r_ZYcHSu.webp" alt="" /></p>
 <p>使用逐飞库最大的一个特点就是便捷快速，以zf_driver为例相较于stm32标准库他省去了很多配置过程</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-5.B_r5g-Mu_oWqu1.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-5.B_r5g-Mu_oWqu1.webp" alt="" /></p>
 <p>举例来说，输出一路PWM信号：</p>
 <p>使用这一个函数就可以实现初始化一路PWM，pwm_channel_enum为其定义的结构体变量，需要使用哪一个管脚就直接填入相应的成员，例：pwm_init(PWM_Right, 17*1000, 0);串口等配置也同样如此，</p>
 <p>如果要使用逐飞店铺里的设备比如摄像头、屏幕陀螺仪等，配置就需要用到zf_device中相应的设备文件，以陀螺仪为例只需要调用其中的init函数就可以了，但是需要在相应的.h中配置设备的信息，且在.h文件中会有设备读取到的相关信息：</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image-1.DMOMmqcA_1l8Fvs.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image-1.DMOMmqcA_1l8Fvs.webp" alt="" /></p>
 <h2>1、电机</h2>
 <p>控制一个直流电机使用DRV8701这个驱动需要一路PWM信号与一路方向信号</p>
 <ol>
@@ -138,7 +138,7 @@
 <p>在进行去零漂操作，同样采集数据放入中断采集</p>
 <h2>4、摄像头</h2>
 <p>摄像头使用总钻风，获取的图像为灰度图像，对其操作主要为数组操作，代码量非常大，我主要的图像代码就快4000行左右</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image.C-Xwo2ay_elhDi.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image.C-Xwo2ay_elhDi.webp" alt="" /></p>
 <p>所以咱们需要理清楚每一步的操作。</p>
 <p>部分说明可以点击---&gt;<a href="https://xcnc1ikzqc12.feishu.cn/wiki/SufJwz9adiYMGvkyQnxcP69Pnuf"> image.c详细解释</a></p>
 <p>这里推荐一些写的比较好的视频</p>
@@ -438,8 +438,8 @@
   </entry>
   <entry>
     <title>Markdown 教程</title>
-    <link href="https://mizuki.mysqil.com/posts/markdown-tutorial/" rel="alternate" type="text/html"/>
-    <id>https://mizuki.mysqil.com/posts/markdown-tutorial/</id>
+    <link href="https://herd1s.github.io/posts/markdown-tutorial/" rel="alternate" type="text/html"/>
+    <id>https://herd1s.github.io/posts/markdown-tutorial/</id>
     <published>2025-01-20T00:00:00.000Z</published>
     <updated>2025-01-20T00:00:00.000Z</updated>
     <summary>一个 Markdown 博客文章的简单示例。</summary>
@@ -1113,8 +1113,8 @@ A backtick-delimited string in a code span: `` `foo` ``
   </entry>
   <entry>
     <title>电子信息新生的学习路线</title>
-    <link href="https://mizuki.mysqil.com/posts/learn/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF%E6%96%B0%E7%94%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" rel="alternate" type="text/html"/>
-    <id>https://mizuki.mysqil.com/posts/learn/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF%E6%96%B0%E7%94%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</id>
+    <link href="https://herd1s.github.io/posts/learn/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF%E6%96%B0%E7%94%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" rel="alternate" type="text/html"/>
+    <id>https://herd1s.github.io/posts/learn/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF%E6%96%B0%E7%94%9F%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</id>
     <published>2024-01-01T00:00:00.000Z</published>
     <updated>2024-01-01T00:00:00.000Z</updated>
     <summary>22级电子相关专业本科生的学习路线分享，涵盖电控、硬件、机械等方向</summary>
@@ -1509,7 +1509,7 @@ A backtick-delimited string in a code span: `` `foo` ``
 <p>推荐使用拓竹的切片软件，3d打印本质上就是面成体，通过一层一层的切片堆出3d模型，这种技术称为FDM</p>
 <h1>六、常用软件</h1>
 <p>大学生在使用软件方面有着许多便利，可以向学校申请教育邮箱</p>
-<p><img src="https://mizuki.mysqil.com/_astro/image.C_5k5S2L_ZVclE1.webp" alt="" /></p>
+<p><img src="https://herd1s.github.io/_astro/image.C_5k5S2L_ZVclE1.webp" alt="" /></p>
 <p>申请好教育邮箱过后，可以使用许多付费软件，强烈推荐</p>
 <h2>(1)Keil</h2>
 <p>Keil是嵌入式开发领域，特别是ARM架构下的经典开发环境。它提供强大的代码编辑、编译和调试功能，其µVision IDE集成了完善的开发工具链，支持多种ARM Cortex-M核处理器。对于学习51、STM32等芯片的开发而言，掌握Keil意味着你能直接接触到最主流的开发流程，从程序编写、编译到硬件在线调试，都能在这个集成环境中完成。尽管现在有更多现代编辑器可选，但Keil在高校教学和企业项目中仍占有重要地位，是嵌入式入门必须熟悉的工具之一。</p>
@@ -1549,8 +1549,8 @@ A backtick-delimited string in a code span: `` `foo` ``
   </entry>
   <entry>
     <title>Mizuki 简单使用指南</title>
-    <link href="https://mizuki.mysqil.com/posts/guide/" rel="alternate" type="text/html"/>
-    <id>https://mizuki.mysqil.com/posts/guide/</id>
+    <link href="https://herd1s.github.io/posts/guide/" rel="alternate" type="text/html"/>
+    <id>https://herd1s.github.io/posts/guide/</id>
     <published>2024-04-01T00:00:00.000Z</published>
     <updated>2024-04-01T00:00:00.000Z</updated>
     <summary>如何使用此博客模板。</summary>
