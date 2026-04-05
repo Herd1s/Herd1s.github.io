@@ -1,49 +1,59 @@
+﻿# 关于我
 
-This website is built with the **Astro** framework using the [Mizuki](https://github.com/matsuzaka-yuki/mizuki) theme.
+你好，我是 **Herd1s**，一名专注于嵌入式系统、机器人与智能感知方向的嵌入式工程师。  
+我长期投入于微控制器开发、机器人系统集成、机器视觉与无线通信等方向，喜欢把一个想法从方案设计一步步落到可运行、可调试、可迭代的完整系统中。
 
-::github{repo="matsuzaka-yuki/Mizuki"}
+## 专业方向
 
-## 🌟 Theme Features
+### 微控制器与嵌入式开发
+- 熟练掌握多种主流单片机平台开发，包括 **51、STM32、ESP32、NXP RT1064、MM32、GD32** 等系列
+- 具备丰富的 **标准库** 与 **HAL 库** 开发经验
+- 能够基于 **FreeRTOS** 构建嵌入式应用
+- 具备 **树莓派**、**Jetson** 平台开发能力
+- 熟悉 **Ubuntu** 操作系统，并拥有 **ROS** 开发经验
+- 能够在机器人平台上实现感知、规划、控制等功能
+- 持有 **初级嵌入式工程师证书**
 
-### 🎨 Design & User Experience
-- **Modern & Elegant Design** - Clean, minimalist interface with beautiful typography
-- **Fully Responsive** - Optimized for all devices from mobile to desktop
-- **Dark/Light Mode** - Automatic theme switching with smooth transitions
-- **Beautiful Typography** - Enhanced readability with JetBrains Mono font
-- **Smooth Animations** - Fluid page transitions and interactive elements
+### 编程与软件能力
+- 熟练掌握 **C / C++**，广泛应用于嵌入式软件开发与算法实现
+- 熟练使用 **Python** 进行数据处理、视觉算法开发与 ROS 系统编程
+- 掌握 **HTML** 与 **微信小程序开发**
+- 能够构建跨平台的远程监控与交互界面
 
-### 🔍 Content & Search
-- **Advanced Search** - Powered by [Pagefind](https://pagefind.app/) for fast, accurate results
-- **Enhanced Markdown** - Extended syntax with code highlighting and math support
-- **Interactive Table of Contents** - Auto-scroll navigation for long articles
-- **RSS Feed Generation** - Stay updated with automatic feed generation
-- **Reading Time Estimation** - Know how long articles take to read
-- **Post Categorization** - Organize content with tags and categories
+### 机器视觉与智能感知
+- 熟悉 **OpenCV**、**YOLO** 等视觉开发工具
+- 具备视觉识别、目标检测与图像处理算法的实际部署能力
+- 能够高效完成视觉感知系统的开发与集成
 
+### 无线通信技术
+- 掌握 **Wi-Fi**、**蓝牙** 等无线通信协议
+- 具备多种通信方式下的系统设计与集成经验
+- 能够根据场景需求完成稳定、灵活的通信方案设计
 
+### 硬件设计与制造能力
+- 具备 **PCB 设计、焊接与调试** 能力
+- 独立完成过多款主控板与驱动板设计
+- 其中包括一款 **FOC 无刷电机驱动板**
+- 掌握 **SolidWorks** 进行 3D 建模与 3D 打印
+- 具备从结构设计到硬件实现的完整开发能力
 
-### 📱 Special Pages
-- **Anime Tracking Page** - Track your anime watching progress with ratings
-- **Friends Links Page** - Showcase friend websites with beautiful cards
-- **Diary/Moments Page** - Share life moments like social media posts
-- **Archive Page** - Organized timeline view of all posts
-- **About Page** - Customizable personal introduction (this page!)
+## 项目与竞赛经历
 
-### 🛠 Technical Features
-- **Enhanced Code Blocks** - Powered by [Expressive Code](https://expressive-code.com/)
-- **Math Support** - LaTeX rendering with KaTeX for mathematical expressions
-- **Image Optimization** - PhotoSwipe gallery with lazy loading
-- **SEO Optimized** - Built-in sitemap and meta tags for better search visibility
-- **Performance Optimized** - Fast loading with caching and optimization
-- **Comment System Ready** - Integration support for Twikoo comments
+- 多次参加 **电子设计竞赛、蓝桥杯嵌入式比赛、恩智浦智能车竞赛、中国机器人大赛** 并获奖
+- 拥有丰富的项目实战经验，能够独立完成从方案设计、系统搭建到调试优化的全流程开发
+- 曾自主设计并实现 **轮足机器人** 等复杂系统
+- 在该项目中基于 **ROS** 搭建机器人软件架构，实现了运动控制、环境感知与自主决策等功能
+- 进一步基于轮足机器人平台开展 **SLAM 室内建图** 研究，实现环境地图构建与实时更新
+- 开发了 **Web 端可视化界面**，可通过浏览器远程查看建图过程与地图信息
 
-### 🎯 Advanced Markdown Features
-- **Callouts & Admonitions** - Beautiful info boxes with `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`
-- **Mathematical Equations** - Write LaTeX math with `$inline$` and `$$block$$` syntax
-- **GitHub Cards** - Embed repository cards with `::github{repo="user/repo"}`
-- **Syntax Highlighting** - Advanced code highlighting with line numbers
-- **Copy Code Buttons** - Easy code copying functionality
+## 综合素质
+
+- 具备较强的独立分析与问题解决能力
+- 在校期间担任科技竞赛社团负责人
+- 曾为低年级同学讲授知识并指导竞赛训练
+- 在团队中能够主动提出改进意见，并保持积极沟通与协作
+- 兴趣爱好是 **乒乓球**
 
 ---
 
-*Built with ❤️ using Astro and inspired by modern web design principles.*
+如果你对嵌入式开发、机器人系统、智能感知或者相关项目合作感兴趣，欢迎和我交流。
