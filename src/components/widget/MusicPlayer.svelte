@@ -1,59 +1,55 @@
-<script lang="ts">
-// 导入 Svelte 的生命周期函数和过渡效果
+﻿<script lang="ts">
+// 瀵煎叆 Svelte 鐨勭敓鍛藉懆鏈熷嚱鏁板拰杩囨浮鏁堟灉
 
-// 导入 Icon 组件，用于显示图标
-import Icon from "@iconify/svelte";
+// 瀵煎叆 Icon 缁勪欢锛岀敤浜庢樉绀哄浘鏍?import Icon from "@iconify/svelte";
 import { onDestroy, onMount } from "svelte";
 import { slide } from "svelte/transition";
-// 从配置文件中导入音乐播放器配置
-import { musicPlayerConfig } from "../../config";
-// 导入国际化相关的 Key 和 i18n 实例
+// 浠庨厤缃枃浠朵腑瀵煎叆闊充箰鎾斁鍣ㄩ厤缃?import { musicPlayerConfig } from "../../config";
+// 瀵煎叆鍥介檯鍖栫浉鍏崇殑 Key 鍜?i18n 瀹炰緥
 import Key from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 
-// 音乐播放器模式，可选 "local" 或 "meting"，从本地配置中获取或使用默认值 "meting"
-let mode = musicPlayerConfig.mode ?? "meting";
-// Meting API 地址，从配置中获取或使用默认地址(bilibili.uno(由哔哩哔哩松坂有希公益管理)),服务器在海外,部分音乐平台可能不支持并且速度可能慢,也可以自建Meting API
+// 闊充箰鎾斁鍣ㄦā寮忥紝鍙€?"local" 鎴?"meting"锛屼粠鏈湴閰嶇疆涓幏鍙栨垨浣跨敤榛樿鍊?"meting"
+let mode = musicPlayerConfig.mode ?? "local";
+// Meting API 鍦板潃锛屼粠閰嶇疆涓幏鍙栨垨浣跨敤榛樿鍦板潃(bilibili.uno(鐢卞摂鍝╁摂鍝╂澗鍧傛湁甯屽叕鐩婄鐞?),鏈嶅姟鍣ㄥ湪娴峰,閮ㄥ垎闊充箰骞冲彴鍙兘涓嶆敮鎸佸苟涓旈€熷害鍙兘鎱?涔熷彲浠ヨ嚜寤篗eting API
 let meting_api =
 	musicPlayerConfig.meting_api ??
 	"https://www.bilibili.uno/api?server=:server&type=:type&id=:id&auth=:auth&r=:r";
-// Meting API 的 ID，从配置中获取或使用默认值
-let meting_id = musicPlayerConfig.id ?? "14164869977";
-// Meting API 的服务器，从配置中获取或使用默认值,有的meting的api源支持更多平台,一般来说,netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
+// Meting API 鐨?ID锛屼粠閰嶇疆涓幏鍙栨垨浣跨敤榛樿鍊?let meting_id = musicPlayerConfig.id ?? "14164869977";
+// Meting API 鐨勬湇鍔″櫒锛屼粠閰嶇疆涓幏鍙栨垨浣跨敤榛樿鍊?鏈夌殑meting鐨刟pi婧愭敮鎸佹洿澶氬钩鍙?涓€鑸潵璇?netease=缃戞槗浜戦煶涔? tencent=QQ闊充箰, kugou=閰风嫍闊充箰, xiami=铏剧背闊充箰, baidu=鐧惧害闊充箰
 let meting_server = musicPlayerConfig.server ?? "netease";
-// Meting API 的类型，从配置中获取或使用默认值
-let meting_type = musicPlayerConfig.type ?? "playlist";
-// 播放状态，默认为 false (未播放)
+// Meting API 鐨勭被鍨嬶紝浠庨厤缃腑鑾峰彇鎴栦娇鐢ㄩ粯璁ゅ€?let meting_type = musicPlayerConfig.type ?? "playlist";
+// 鎾斁鐘舵€侊紝榛樿涓?false (鏈挱鏀?
 let isPlaying = false;
-// 播放器是否展开，默认为 false
+// 鎾斁鍣ㄦ槸鍚﹀睍寮€锛岄粯璁や负 false
 let isExpanded = false;
-// 播放器是否隐藏，默认为 false
+// 鎾斁鍣ㄦ槸鍚﹂殣钘忥紝榛樿涓?false
 let isHidden = false;
-// 是否显示播放列表，默认为 false
+// 鏄惁鏄剧ず鎾斁鍒楄〃锛岄粯璁や负 false
 let showPlaylist = false;
-// 当前播放时间，默认为 0
+// 褰撳墠鎾斁鏃堕棿锛岄粯璁や负 0
 let currentTime = 0;
-// 歌曲总时长，默认为 0
+// 姝屾洸鎬绘椂闀匡紝榛樿涓?0
 let duration = 0;
-// 音量，默认为 0.7
+// 闊抽噺锛岄粯璁や负 0.7
 let volume = 0.7;
-// 是否静音，默认为 false
+// 鏄惁闈欓煶锛岄粯璁や负 false
 let isMuted = false;
-// 是否正在加载，默认为 false
+// 鏄惁姝ｅ湪鍔犺浇锛岄粯璁や负 false
 let isLoading = false;
-// 是否随机播放，默认为 false
+// 鏄惁闅忔満鎾斁锛岄粯璁や负 false
 let isShuffled = false;
-// 循环模式，0: 不循环, 1: 单曲循环, 2: 列表循环，默认为 0
+// 寰幆妯″紡锛?: 涓嶅惊鐜? 1: 鍗曟洸寰幆, 2: 鍒楄〃寰幆锛岄粯璁や负 0
 let isRepeating = 0;
-// 错误信息，默认为空字符串
+// 閿欒淇℃伅锛岄粯璁や负绌哄瓧绗︿覆
 let errorMessage = "";
-// 是否显示错误信息，默认为 false
+// 鏄惁鏄剧ず閿欒淇℃伅锛岄粯璁や负 false
 let showError = false;
 
-// 当前歌曲信息
+// 褰撳墠姝屾洸淇℃伅
 let currentSong = {
-	title: "示例歌曲",
-	artist: "示例艺术家",
+	title: "绀轰緥姝屾洸",
+	artist: "绀轰緥鑹烘湳瀹?,
 	cover: "/favicon/favicon-light-192.png",
 	url: "",
 	duration: 0,
@@ -68,7 +64,7 @@ let volumeBar: HTMLElement;
 const localPlaylist = [
 	{
 		id: 1,
-		title: "ひとり上手",
+		title: "銇层仺銈婁笂鎵?,
 		artist: "Kaya",
 		cover: "assets/music/cover/hitori.jpg",
 		url: "assets/music/url/hitori.mp3",
@@ -76,15 +72,15 @@ const localPlaylist = [
 	},
 	{
 		id: 2,
-		title: "眩耀夜行",
-		artist: "スリーズブーケ",
+		title: "鐪╄€€澶滆",
+		artist: "銈广儶銉笺偤銉栥兗銈?,
 		cover: "assets/music/cover/xryx.jpg",
 		url: "assets/music/url/xryx.mp3",
 		duration: 180,
 	},
 	{
 		id: 3,
-		title: "春雷の頃",
+		title: "鏄ラ浄銇爟",
 		artist: "22/7",
 		cover: "assets/music/cover/cl.jpg",
 		url: "assets/music/url/cl.mp3",
@@ -106,8 +102,8 @@ async function fetchMetingPlaylist() {
 		if (!res.ok) throw new Error("meting api error");
 		const list = await res.json();
 		playlist = list.map((song) => {
-			let title = song.name ?? song.title ?? "未知歌曲";
-			let artist = song.artist ?? song.author ?? "未知艺术家";
+			let title = song.name ?? song.title ?? "鏈煡姝屾洸";
+			let artist = song.artist ?? song.author ?? "鏈煡鑹烘湳瀹?;
 			let dur = song.duration ?? 0;
 			if (dur > 10000) dur = Math.floor(dur / 1000);
 			if (!Number.isFinite(dur) || dur <= 0) dur = 0;
@@ -125,7 +121,7 @@ async function fetchMetingPlaylist() {
 		}
 		isLoading = false;
 	} catch (e) {
-		showErrorMessage("Meting 歌单获取失败");
+		showErrorMessage("Meting 姝屽崟鑾峰彇澶辫触");
 		isLoading = false;
 	}
 }
@@ -249,9 +245,9 @@ function handleLoadSuccess() {
 
 function handleLoadError(event: Event) {
 	isLoading = false;
-	showErrorMessage(`无法播放 "${currentSong.title}"，正在尝试下一首...`);
+	showErrorMessage(`鏃犳硶鎾斁 "${currentSong.title}"锛屾鍦ㄥ皾璇曚笅涓€棣?..`);
 	if (playlist.length > 1) setTimeout(() => nextSong(), 1000);
-	else showErrorMessage("播放列表中没有可用的歌曲");
+	else showErrorMessage("鎾斁鍒楄〃涓病鏈夊彲鐢ㄧ殑姝屾洸");
 }
 
 function handleLoadStart() {}
@@ -343,12 +339,12 @@ onMount(() => {
 	if (mode === "meting") {
 		fetchMetingPlaylist();
 	} else {
-		// 使用本地播放列表，不发送任何API请求
+		// 浣跨敤鏈湴鎾斁鍒楄〃锛屼笉鍙戦€佷换浣旳PI璇锋眰
 		playlist = [...localPlaylist];
 		if (playlist.length > 0) {
 			loadSong(playlist[0]);
 		} else {
-			showErrorMessage("本地播放列表为空");
+			showErrorMessage("鏈湴鎾斁鍒楄〃涓虹┖");
 		}
 	}
 });
@@ -377,7 +373,7 @@ onDestroy(() => {
 <div class="music-player fixed bottom-4 right-4 z-50 transition-all duration-300 ease-in-out"
      class:expanded={isExpanded}
      class:hidden-mode={isHidden}>
-    <!-- 隐藏状态的小圆球 -->
+    <!-- 闅愯棌鐘舵€佺殑灏忓渾鐞?-->
     <div class="orb-player w-12 h-12 bg-[var(--primary)] rounded-full shadow-lg cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:scale-110 active:scale-95"
          class:opacity-0={!isHidden}
          class:scale-0={!isHidden}
@@ -391,7 +387,7 @@ onDestroy(() => {
          }}
          role="button"
          tabindex="0"
-         aria-label="显示音乐播放器">
+         aria-label="鏄剧ず闊充箰鎾斁鍣?>
         {#if isLoading}
             <Icon icon="eos-icons:loading" class="text-white text-lg" />
         {:else if isPlaying}
@@ -404,7 +400,7 @@ onDestroy(() => {
             <Icon icon="material-symbols:music-note" class="text-white text-lg" />
         {/if}
     </div>
-    <!-- 收缩状态的迷你播放器（封面圆形） -->
+    <!-- 鏀剁缉鐘舵€佺殑杩蜂綘鎾斁鍣紙灏侀潰鍦嗗舰锛?-->
     <div class="mini-player card-base bg-[var(--float-panel-bg)] shadow-xl rounded-2xl p-3 transition-all duration-500 ease-in-out"
          class:opacity-0={isExpanded || isHidden}
          class:scale-95={isExpanded || isHidden}
@@ -418,10 +414,10 @@ onDestroy(() => {
          }}
          role="button"
          tabindex="0"
-         aria-label="展开音乐播放器">
+         aria-label="灞曞紑闊充箰鎾斁鍣?>
         <div class="flex items-center gap-3 cursor-pointer">
             <div class="cover-container relative w-12 h-12 rounded-full overflow-hidden">
-                <img src={getAssetPath(currentSong.cover)} alt="封面"
+                <img src={getAssetPath(currentSong.cover)} alt="灏侀潰"
                      class="w-full h-full object-cover transition-transform duration-300"
                      class:spinning={isPlaying && !isLoading}
                      class:animate-pulse={isLoading} />
@@ -442,7 +438,7 @@ onDestroy(() => {
             <div class="flex items-center gap-1">
                 <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
                         on:click|stopPropagation={toggleHidden}
-                        title="隐藏播放器">
+                        title="闅愯棌鎾斁鍣?>
                     <Icon icon="material-symbols:visibility-off" class="text-lg" />
                 </button>
                 <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
@@ -452,14 +448,14 @@ onDestroy(() => {
             </div>
         </div>
     </div>
-    <!-- 展开状态的完整播放器（封面圆形） -->
+    <!-- 灞曞紑鐘舵€佺殑瀹屾暣鎾斁鍣紙灏侀潰鍦嗗舰锛?-->
     <div class="expanded-player card-base bg-[var(--float-panel-bg)] shadow-xl rounded-2xl p-4 transition-all duration-500 ease-in-out"
          class:opacity-0={!isExpanded}
          class:scale-95={!isExpanded}
          class:pointer-events-none={!isExpanded}>
         <div class="flex items-center gap-4 mb-4">
             <div class="cover-container relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                <img src={getAssetPath(currentSong.cover)} alt="封面"
+                <img src={getAssetPath(currentSong.cover)} alt="灏侀潰"
                      class="w-full h-full object-cover transition-transform duration-300"
                      class:spinning={isPlaying && !isLoading}
                      class:animate-pulse={isLoading} />
@@ -474,7 +470,7 @@ onDestroy(() => {
             <div class="flex items-center gap-1">
                 <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
                         on:click={toggleHidden}
-                        title="隐藏播放器">
+                        title="闅愯棌鎾斁鍣?>
                     <Icon icon="material-symbols:visibility-off" class="text-lg" />
                 </button>
                 <button class="btn-plain w-8 h-8 rounded-lg flex items-center justify-center"
@@ -501,7 +497,7 @@ onDestroy(() => {
                  }}
                  role="slider"
                  tabindex="0"
-                 aria-label="播放进度"
+                 aria-label="鎾斁杩涘害"
                  aria-valuemin="0"
                  aria-valuemax="100"
                  aria-valuenow={duration > 0 ? (currentTime / duration * 100) : 0}>
@@ -510,7 +506,7 @@ onDestroy(() => {
             </div>
         </div>
         <div class="controls flex items-center justify-center gap-2 mb-4">
-            <!-- 随机按钮高亮 -->
+            <!-- 闅忔満鎸夐挳楂樹寒 -->
             <button class="w-10 h-10 rounded-lg"
                     class:btn-regular={isShuffled}
                     class:btn-plain={!isShuffled}
@@ -538,7 +534,7 @@ onDestroy(() => {
                     disabled={playlist.length <= 1}>
                 <Icon icon="material-symbols:skip-next" class="text-xl" />
             </button>
-            <!-- 循环按钮高亮 -->
+            <!-- 寰幆鎸夐挳楂樹寒 -->
             <button class="w-10 h-10 rounded-lg"
                     class:btn-regular={isRepeating > 0}
                     class:btn-plain={isRepeating === 0}
@@ -573,7 +569,7 @@ onDestroy(() => {
                  }}
                  role="slider"
                  tabindex="0"
-                 aria-label="音量控制"
+                 aria-label="闊抽噺鎺у埗"
                  aria-valuemin="0"
                  aria-valuemax="100"
                  aria-valuenow={volume * 100}>
@@ -610,7 +606,7 @@ onDestroy(() => {
                          }}
                          role="button"
                          tabindex="0"
-                         aria-label="播放 {song.title} - {song.artist}">
+                         aria-label="鎾斁 {song.title} - {song.artist}">
                         <div class="w-6 h-6 flex items-center justify-center">
                             {#if index === currentIndex && isPlaying}
                                 <Icon icon="material-symbols:graphic-eq" class="text-[var(--primary)] animate-pulse" />
@@ -620,7 +616,7 @@ onDestroy(() => {
                                 <span class="text-sm text-[var(--content-meta)]">{index + 1}</span>
                             {/if}
                         </div>
-                        <!-- 歌单列表内封面仍为圆角矩形 -->
+                        <!-- 姝屽崟鍒楄〃鍐呭皝闈粛涓哄渾瑙掔煩褰?-->
                         <div class="w-10 h-10 rounded-lg overflow-hidden bg-[var(--btn-regular-bg)] flex-shrink-0">
                             <img src={getAssetPath(song.cover)} alt={song.title} class="w-full h-full object-cover" />
                         </div>
@@ -792,7 +788,7 @@ onDestroy(() => {
         height: 12px;
     }
 }
-/* 自定义旋转动画，停止时保持当前位置 */
+/* 鑷畾涔夋棆杞姩鐢伙紝鍋滄鏃朵繚鎸佸綋鍓嶄綅缃?*/
 @keyframes spin-continuous {
     from {
         transform: rotate(0deg);
@@ -811,7 +807,7 @@ onDestroy(() => {
     animation-play-state: running;
 }
 
-/* 让主题色按钮更有视觉反馈 */
+/* 璁╀富棰樿壊鎸夐挳鏇存湁瑙嗚鍙嶉 */
 button.bg-\[var\(--primary\)\] {
     box-shadow: 0 0 0 2px var(--primary);
     border: none;
